@@ -15,8 +15,10 @@ relatorio = Blueprint("Relatorio", __name__, description="Operations on users")
 class RelatorioList(MethodView):
     # @jwt_required()
     @relatorio.response(200, RelatorioSchema(many=True))
-    def get(self):
-        return RelatorioModel.query.all()
+    def get(self, _nomeCrianca, _dataRelatorio):
+        relatorio = RelatorioModel.query.filter_by(nomeCrianca=_nomeCrianca, dataRelatorio=_dataRelatorio).first_or_404()
+        if relatorio:
+            return relatorio
 
     # @jwt_required()
     @relatorio.arguments(RelatorioSchema)
