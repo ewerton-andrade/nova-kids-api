@@ -7,13 +7,12 @@ from db import db
 from models.user import UserModel
 from schemas import UserSchema
 from main.utils import hash_pass, query_by_model_field, delete_record_by_field
-from main.oauth2 import require_oauth
 
 userStore = Blueprint("UserStore", __name__, description="Operations on users")
 
 @userStore.route("/user/<string:user_email>")
 class UserStore(MethodView):
-    @require_oauth(['admin'])
+    @jwt_required()
     @userStore.response(200, UserSchema)
     def get(self, user_email):
         try:
@@ -23,7 +22,7 @@ class UserStore(MethodView):
         except:
             abort(404, message="User not found.")
 
-    @require_oauth(['admin'])
+    @jwt_required()
     @userStore.response(200, UserSchema)
     def delete(self, user_email):
         try:
@@ -34,12 +33,12 @@ class UserStore(MethodView):
 
 @userStore.route("/users")
 class UserList(MethodView):
-    @require_oauth(['admin'])
+    @jwt_required()
     @userStore.response(200, UserSchema(many=True))
     def get(self):
         return UserModel.query.all()
 
-    @require_oauth(['admin'])
+    @jwt_required()
     @userStore.arguments(UserSchema)
     @userStore.response(201, UserSchema)
     def post(self, user_data):
@@ -54,7 +53,7 @@ class UserList(MethodView):
         except SQLAlchemyError:
             abort(500, message="An error occurred while inserting the user")
     
-    @require_oauth(['admin'])
+    @jwt_required()
     def put(self, user_email):
         user = UserModel.query.get_or_404(user_email)
         raise NotImplementedError("Updating an user is not implemented.")

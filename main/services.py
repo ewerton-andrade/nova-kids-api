@@ -8,8 +8,8 @@ from models.user import UserModel
 
 services = Blueprint("Services", __name__ , description="API Services")
 
-@services.route('/login_licit', methods=["POST"])
-def login_licit():
+@services.route('/login', methods=["POST"])
+def login():
     response,code = doLogin()
     return jsonify(response),code
 

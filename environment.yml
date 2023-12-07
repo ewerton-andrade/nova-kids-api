@@ -1,7 +1,5 @@
-name: flask_boilerplate
+name: kids-api
 dependencies:
-  - nodejs=18.*
-  - yarn=1.22.19
   - python=3.10.12
   - psycopg2==2.9.3
   - pip

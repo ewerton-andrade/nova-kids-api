@@ -13,12 +13,12 @@ relatorio = Blueprint("Relatorio", __name__, description="Operations on users")
 
 @relatorio.route("/relatorio")
 class RelatorioList(MethodView):
-    # @require_oauth(['admin'])
-    # @relatorio.response(200, RelatorioSchema(many=True))
-    # def get(self):
-    #     return UserModel.query.all()
+    # @jwt_required()
+    @relatorio.response(200, RelatorioSchema(many=True))
+    def get(self):
+        return RelatorioModel.query.all()
 
-    # @require_oauth(['admin'])
+    # @jwt_required()
     @relatorio.arguments(RelatorioSchema)
     @relatorio.response(201, RelatorioSchema)
     def post(self, relatorio_data):
