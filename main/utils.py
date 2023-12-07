@@ -33,6 +33,9 @@ def retornaDataDia(data: datetime) -> str:
 def retornaDataMes(data: datetime) -> str:
     return data.strftime("%m")
 
+def retornaDataAno(data: datetime) -> str:
+    return data.strftime("%Y")
+
 def writeObject(dbObject):
     try:
         db.session.add(dbObject)
