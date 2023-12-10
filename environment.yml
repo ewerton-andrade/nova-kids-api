@@ -2,7 +2,7 @@ name: kids-api
 dependencies:
   - python=3.10.12
   - psycopg2==2.9.3
-  - pip
+  - pip==23.3.1
   - pip:
     - alembic==1.12.1
     - apispec==6.3.0
