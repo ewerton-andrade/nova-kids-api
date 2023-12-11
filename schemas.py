@@ -9,13 +9,16 @@ class UserSchema(Schema):
 
 class RelatorioSchema(Schema):
     id = fields.Str(dump_only=True)
-    nomeCrianca = fields.Str(required=True)
-    dataRelatorio = fields.DateTime(required=True)
-    relatorio_presenca = fields.Dict(keys=fields.Str(), values=fields.Str())
-    relatorio_meditacao = fields.Dict(keys=fields.Str(), values=fields.Str())
-    relatorio_versiculo = fields.Dict(keys=fields.Str(), values=fields.Str())
-    relatorio_culto = fields.Dict(keys=fields.Str(), values=fields.Str())
-
+    crianca = fields.Str(required=True)
+    data = fields.DateTime(required=True)
+    presenca = fields.Boolean(required=True)
+    motivo_presenca = fields.Str(required=True)
+    meditacao = fields.Boolean(required=True)
+    motivo_meditacao = fields.Str(required=True)
+    versiculo = fields.Integer(required=True)
+    motivo_versiculo = fields.Str(required=True)
+    culto= fields.Boolean(required=True)
+    motivo_culto = fields.Str(required=True)
 
 class LogInSchema(Schema):
     username = fields.Str(required=True)
