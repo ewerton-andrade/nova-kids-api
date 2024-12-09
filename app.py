@@ -10,11 +10,7 @@ from flask_jwt_extended import JWTManager
 from flask_cors import CORS
 
 from db import db
-from resources.user import userStore as UserBlueprint
-from main.services import services as ServiceBlueprint
-from resources.oauth2 import oauth2 as Oauth2Blueprint
 from resources.relatorio import relatorio as RelatorioBlueprint
-from main.oauth2 import config_oauth
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -44,7 +40,6 @@ def create_app():
     migrate = Migrate(app, db)
     
     cors_setup(app)
-    config_oauth(app)
     api_setup(app)
      
     return app
@@ -57,14 +52,8 @@ def db_setup(app, db_url=None):
 def cors_setup(app):
     CORS(app, max_age=60*60*4)
 
-def oauth2_setup(app):
-    config_oauth(app)
-
 def api_setup(app):
     api = Api(app)
-    api.register_blueprint(Oauth2Blueprint)
-    api.register_blueprint(UserBlueprint)
-    api.register_blueprint(ServiceBlueprint)
     api.register_blueprint(RelatorioBlueprint)
 
 def jwt_token_exceptions(jwt):

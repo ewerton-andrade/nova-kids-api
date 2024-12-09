@@ -7,7 +7,6 @@ from db import db
 from models.relatorio import RelatorioModel
 from schemas import RelatorioSchema
 from main.utils import hash_pass, query_by_model_field, delete_record_by_field
-from main.oauth2 import require_oauth
 
 relatorio = Blueprint("Relatorio", __name__, description="Operations on users")
 
